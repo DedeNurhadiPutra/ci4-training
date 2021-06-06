@@ -7,36 +7,22 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Episode</th>
+                        <th scope="col">Sampul</th>
+                        <th scope="col">Judul</th>
+                        <th scope="col">Detail</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Dragon Ball</td>
-                        <td>9</td>
-                        <td>1300+-</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Naruto</td>
-                        <td>9.5</td>
-                        <td>1200+-</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>One Piece</td>
-                        <td>10</td>
-                        <td>976</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">34</th>
-                        <td>Boku No Pico</td>
-                        <td>999999999999999</td>
-                        <td>999999999999999</td>
-                    </tr>
+                    <?php $i = 1; ?>
+                    <?php foreach ($anime as $an) : ?> <tr>
+                            <th scope="row"><?= $i++; ?></th>
+                            <td><img src="/img/<?= $an['sampul']; ?>" alt="son goku" class="sampul"></td>
+                            <td><?= $an['judul']; ?></td>
+                            <td>
+                                <a href="" class="btn btn-success">Klik Disini</a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>
         </div>
