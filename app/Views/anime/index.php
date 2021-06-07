@@ -19,7 +19,7 @@
                             <td><img src="/img/<?= $an['sampul']; ?>" alt="son goku" class="sampul"></td>
                             <td><?= $an['judul']; ?></td>
                             <td>
-                                <a href="" class="btn btn-success">Klik Disini</a>
+                                <a href="/anime/<?= $an['slug']; ?>" class="btn btn-success">Klik Disini</a>
                             </td>
                         </tr>
                     <?php endforeach ?>

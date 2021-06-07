@@ -13,11 +13,11 @@ class Anime extends BaseController
     }
     public function index()
     {
-        $anime = $this->animeModel->findAll();
+        // $anime = $this->animeModel->findAll();
 
         $data = [
             'title' => 'Anime List',
-            'anime' => $anime
+            'anime' => $this->animeModel->getAnime()
         ];
 
         // Cara Konek db tanpa model :
@@ -29,5 +29,14 @@ class Anime extends BaseController
 
 
         return view('anime/index', $data);
+    }
+
+    public function detail($slug)
+    {
+        $data = [
+            'title' => 'Detail Komik',
+            'anime' => $this->animeModel->getAnime($slug)
+        ];
+        return view('anime/detail', $data);
     }
 }
