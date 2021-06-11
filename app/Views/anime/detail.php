@@ -8,7 +8,7 @@
             <div class="card mb-3" style="max-width: 540px">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="/img/<?= $anime['sampul']; ?>" class="card-img" alt="son goku">
+                        <img src="/img/<?= $anime['sampul']; ?>" class="card-img" alt="">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">

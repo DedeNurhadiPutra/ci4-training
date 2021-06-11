@@ -8,6 +8,7 @@ class AnimeModel extends Model
 {
     protected $table = 'anime';
     protected $useTimestamps = true;
+    protected $allowedFields = ['judul', 'slug', 'penulis', 'sampul', 'rating'];
 
     public function getAnime($slug = false)
     {
