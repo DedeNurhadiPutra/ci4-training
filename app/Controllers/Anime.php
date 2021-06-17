@@ -48,8 +48,10 @@ class Anime extends BaseController
 
     public function create()
     {
+        // session();
         $data = [
-            'title' => 'Form Tambah Anime'
+            'title' => 'Form Tambah Anime',
+            'validation' => \Config\Services::validation()
         ];
 
         return view('anime/create', $data);
@@ -57,6 +59,23 @@ class Anime extends BaseController
 
     public function save()
     {
+        // validasi input
+
+        if (!$this->validate([
+            'judul' => [
+                'rules' => 'required|is_unique[anime.judul]',
+                'errors' => [
+                    'required' => '{field} Anime tidak boleh kosong',
+                    'is_unique' => '{field} Anime sudah terdaftar'
+                ]
+            ],
+            'penulis' => 'required'
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to('/anime/create')->withInput()->with('validation', $validation);
+        }
+
+
         $slug = url_title($this->request->getVar('judul'), '-', true);
         $this->animeModel->save([
             'judul' => $this->request->getVar('judul'),
