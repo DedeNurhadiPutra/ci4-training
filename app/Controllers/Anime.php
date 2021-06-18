@@ -89,4 +89,66 @@ class Anime extends BaseController
 
         return redirect()->to('/anime');
     }
+
+
+    public function delete($id)
+    {
+        $this->animeModel->delete($id);
+
+        session()->setFlashdata('pesan', 'Data berhasil dihapus.');
+
+        return redirect()->to('/anime');
+    }
+
+    public function edit($slug)
+    {
+        $data = [
+            'title' => 'Form ubah data Anime',
+            'validation' => \Config\Services::validation(),
+            'anime' => $this->animeModel->getAnime($slug)
+        ];
+
+        return view('anime/edit', $data);
+    }
+
+    public function update($id)
+    {
+        // cek judul 
+        $animeLama = $this->animeModel->getAnime($this->request->getVar('slug'));
+        if ($animeLama['judul'] == $this->request->getVar('judul')) {
+            $rule_judul = 'required';
+        } else {
+            $rule_judul = 'required|is_unique[anime.judul]';
+        }
+
+
+        if (!$this->validate([
+            'judul' => [
+                'rules' => $rule_judul,
+                'errors' => [
+                    'required' => '{field} Anime tidak boleh kosong',
+                    'is_unique' => '{field} Anime sudah terdaftar'
+                ]
+            ],
+            'penulis' => 'required'
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to('/anime/edit/' . $this->request->getVar('slug'))->withInput()->with('validation', $validation);
+        }
+
+
+        $slug = url_title($this->request->getVar('judul'), '-', true);
+        $this->animeModel->save([
+            'id' => $id,
+            'judul' => $this->request->getVar('judul'),
+            'slug' => $slug,
+            'penulis' => $this->request->getVar('penulis'),
+            'sampul' => $this->request->getVar('sampul'),
+            'rating' => $this->request->getVar('rating')
+        ]);
+
+        session()->setFlashdata('pesan', 'Data berhasil diubah.');
+
+        return redirect()->to('/anime');
+    }
 }

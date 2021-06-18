@@ -35,7 +35,11 @@ $routes->get('/', 'Pages::index');
 
 $routes->get('/anime/create', 'Anime::create');
 
-$routes->get('/anime/(:segment)', 'Anime::detail/$1');
+$routes->get('/anime/edit/(:segment)', 'Anime::edit/$1');
+
+$routes->delete('anime/(:num)', 'Anime::delete/$1');
+
+$routes->get('/anime/(:any)', 'Anime::detail/$1');
 
 
 

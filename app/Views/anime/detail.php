@@ -16,8 +16,15 @@
                             <p class="card-text"><?= $anime['penulis']; ?></p>
                             <p class="card-text"><small class="text-muted"><?= $anime['rating']; ?></small></p>
 
-                            <a href="" class="btn btn-warning">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a>
+                            <a href="/anime/edit/<?= $anime['slug']; ?>" class="btn btn-warning">Edit</a>
+
+                            <form action="/anime/<?= $anime['id']; ?>" method="post" class="d-inline">
+                                <?= csrf_field(); ?>
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Delete</button>
+                            </form>
+
+
                             <br><br>
                             <a href="/anime" class="">Kembali ke Anime List</a>
                         </div>
